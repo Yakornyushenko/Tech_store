@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Button, Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {REGISTRATION_ROUTE} from "../utils/consts";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const Terms = () => {
-        //TODO alive checkbox
+const Terms = observer(() => {
+        const {user} = useContext(Context)
     return (
         <Container>
                 <h2 className=' d-flex justify-content-center mt-4 mb-2'>Terms of service</h2>
@@ -102,13 +104,17 @@ const Terms = () => {
                    sequi,
                    similique? Reiciendis?
                  <div className='d-flex justify-content-center'>
-                         <Link TO={REGISTRATION_ROUTE}>
-                         <Button className='m-2' style={{width: 200}} variant={'outline-primary'}>
+                         <Link to={REGISTRATION_ROUTE}>
+                         <Button className='m-2' style={{width: 200}} variant={'outline-primary'}
+                         onClick={() => user.setTerms(true)}
+                         >
                                  I agree
                          </Button>
                          </Link>
                          <Link to={REGISTRATION_ROUTE}>
-                                 <Button className='m-2' style={{width: 200}} variant={'outline-danger'}>
+                                 <Button className='m-2' style={{width: 200}} variant={'outline-danger'}
+                                 onClick={() => user.setTerms(false)}
+                                 >
                                          I disagree
                                  </Button>
                          </Link>
@@ -117,6 +123,6 @@ const Terms = () => {
            </div>
         </Container>
     );
-};
+});
 
 export default Terms;
