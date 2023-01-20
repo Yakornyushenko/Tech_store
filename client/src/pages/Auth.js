@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
-import '../styles/registrationButton.css'
+import React, {useContext} from 'react';
+import '../styles/component_style/registrationButton.css'
 import {Link, useLocation} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, TERMS_ROUTE} from "../utils/consts";
+import {Context} from "../index";
+import {observer} from "mobx-react-lite";
 
-const Auth = () => {
-    //TODO alive checkbox
-    const [check, setCheck] = useState(false)
+const Auth = observer(() => {
+
+    const {user} = useContext(Context)
     const location = useLocation()
     const isRegistration = location.pathname === REGISTRATION_ROUTE
+
     return (
         <section className="mt-5">
         <div className="mask d-flex align-items-center h-100">
@@ -50,7 +53,8 @@ const Auth = () => {
                                     {isRegistration ?
                                         <div className="form-check d-flex justify-content-center mb-3">
                                             <input
-                                                onClick={() => setCheck(!check)}
+                                                checked={user.terms}
+                                                onChange={() => user.setTerms(!user.terms)}
                                                 className="form-check-input me-2" type="checkbox" value=''
                                                 id="blablablablablablablabla"/>
                                             <label className="form-check-label" htmlFor="blablablablablablablabla">
@@ -65,7 +69,7 @@ const Auth = () => {
 
                                     <div className="d-flex justify-content-center">
                                         <button
-                                            disabled={!check}
+                                            disabled={!user.terms}
                                             type="button"
                                             className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
                                             {isRegistration ? 'register' : 'authorization'}
@@ -92,6 +96,6 @@ const Auth = () => {
             </div>
         </div>
     </section>);
-};
+});
 
 export default Auth;

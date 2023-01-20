@@ -1,0 +1,38 @@
+.footer p, h4 {
+    color: white;
+}
+.footer {
+    background-color: #202529;
+}
+.footer-description {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    padding-top: 30px;
+}
+.footer-description p {
+    cursor: pointer;
+    font-size: 16px;
+}
+.footer-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.footer-social-networks {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.footer-social-unit {
+    padding-right: 20px;
+}
+.footer-descTitle {
+    font-size: 22px;
+    font-family: 'Playfair Display', serif;
+}
+.footer-rights {
+    font-weight: bold;
+    font-size: 12px;
+    font-style: italic;
+}
