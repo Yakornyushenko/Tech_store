@@ -17,7 +17,7 @@ export const NavBar = observer(() => {
                     className="btn"
                     onClick={() => device.setActiveMenu(!device.activeMenu)}
                     >
-                    <Image src={burger_menu} width={20} height={20}/>
+                    <Image alt='side menu' src={burger_menu} width={20} height={20}/>
                     </button>
                     : null
                 }
@@ -25,7 +25,7 @@ export const NavBar = observer(() => {
                 <NavLink style={{color: 'white'}} to={SHOP_ROUTE}> TYMBA SHOP</NavLink>
                 {user.isAuth ?
                     <Nav>
-                        <Button className='me-4' variant={'outline-light'}>Admin panel</Button>
+                        <Button  className='me-4' variant={'outline-light'}>Admin panel</Button>
                         <Button variant={'outline-light'} onClick={() => user.setIsAuth(false)}>sign in</Button>
                     </Nav>
                     :

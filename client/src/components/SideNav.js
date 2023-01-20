@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {ListGroupItem, Navbar} from "react-bootstrap";
+import {Button, Image, ListGroupItem, Navbar} from "react-bootstrap";
 import '../styles/component_style/sideNavStyle.css'
+import burger_menu from "../styles/images/burger_menu.png";
 
 const SideNav = observer(() => {
     const {device} = useContext(Context)
@@ -16,8 +17,16 @@ const SideNav = observer(() => {
             <Navbar onClick={(e) => e.stopPropagation() } className='menu_content d-grid align-items-lg-start' style={{padding: 20}}>
 
                 <div>
-                    <div className="menu_header me-4 mb-4">
+                    <div className="menu_header mb-4">
                         Choose type of your device
+                        <Button
+                            style={{marginLeft:15}}
+                            variant='outline-primary'
+                            className="btn"
+                            onClick={() => device.setActiveMenu(!device.activeMenu)}
+                        >
+                            <Image alt='side menu' src={burger_menu} width={22} height={22}/>
+                        </Button>
                     </div>
 
                     <div>

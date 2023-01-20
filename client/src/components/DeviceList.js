@@ -13,7 +13,6 @@ const DeviceList = observer(() => {
                     device={device}
                     key={device.id}
                 >
-
                 </DeviceItem>
             )}
         </Row>

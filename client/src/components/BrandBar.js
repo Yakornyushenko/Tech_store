@@ -6,7 +6,7 @@ import {Card, Form} from "react-bootstrap";
 const BrandBar = observer(() => {
     const {device} = useContext(Context)
     return (
-        <Form className='d-flex'>
+        <Form className='d-flex justify-content-center'>
             {device.brands.map(brand =>
                 <Card
                     style={{cursor:"pointer"}}

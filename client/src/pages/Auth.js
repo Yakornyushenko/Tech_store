@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import '../styles/registrationButton.css'
+import '../styles/component_style/registrationButton.css'
 import {Link, useLocation} from "react-router-dom";
 import {LOGIN_ROUTE, REGISTRATION_ROUTE, TERMS_ROUTE} from "../utils/consts";
 import {Context} from "../index";
