@@ -2,11 +2,13 @@ import {useContext} from "react";
 import {Context} from "../index";
 import {Button, Container, Image, Nav, Navbar} from "react-bootstrap";
 import {NavLink, useLocation} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
+import {ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE} from "../utils/consts";
 import {observer} from "mobx-react-lite";
 import burger_menu from '../styles/images/icons8-burger-91.png'
+import {useHistory} from "react-router-dom";
 
 export const NavBar = observer(() => {
+    const history = useHistory()
     const {user, device} = useContext(Context)
     const location = useLocation()
     return (
@@ -25,12 +27,16 @@ export const NavBar = observer(() => {
                 <NavLink style={{color: 'white'}} to={SHOP_ROUTE}> TYMBA SHOP</NavLink>
                 {user.isAuth ?
                     <Nav>
-                        <Button  className='me-4' variant={'outline-light'}>Admin panel</Button>
-                        <Button variant={'outline-light'} onClick={() => user.setIsAuth(false)}>sign in</Button>
+                        <Button  className='me-4' variant={'outline-light'}
+                        onClick={() => history.push(ADMIN_ROUTE)}
+                        >
+                            Admin panel
+                        </Button>
+                        <Button variant={'outline-light'} onClick={() => history.push(LOGIN_ROUTE) }>sign in</Button>
                     </Nav>
                     :
                     <Nav>
-                        <Button variant={'outline-light'} onClick={() => user.setIsAuth(true)}>log in</Button>
+                        <Button variant={'outline-light'} onClick={() => user.setIsAuth(true)}>log out</Button>
                     </Nav>
                 }
             </Container>
