@@ -17,11 +17,11 @@ import Terms from "./pages/Terms";
 export const authRoutes = [
     {
         path: ADMIN_ROUTE,
-        element: Admin
+        component: Admin
     },
     {
         path: BASKET_ROUTE,
-        element: Basket
+        component: Basket
     }
 ]
 
