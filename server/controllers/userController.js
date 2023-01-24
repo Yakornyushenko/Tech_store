@@ -7,8 +7,7 @@ const generateJwt = (id, email, role) => {
     return jwtToken.sign(
         {id, email, role},
         process.env.SECRET_KEY,
-        {expiresIn: '24h'},
-        undefined
+        {expiresIn: '24h'}
     )
 }
 
@@ -20,13 +19,14 @@ class UserController {
         }
         const candidate = await User.findOne({where: {email}})
         if (candidate) {
-            return next(ApiError.badRequest('Incorrect email'))
+            return next(ApiError.internal('Incorrect password'))
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({email, role, password: hashPassword})
-        const basket = await Basket.create({userId: user.user.id})
-        const jwt = generateJwt(user.id, user.email,user.role )
-        return res.json(jwt)
+        console.log('user', user)
+        // const basket = await Basket.create({userId: user.id})
+        const jwt = generateJwt(user.id, user.email, user.role )
+        return res.json({jwt})
     }
     async login(req, res, next) {
         const {email, password} = req.body
@@ -36,14 +36,14 @@ class UserController {
         }
         let validPassword = bcrypt.compareSync(password, user.password)
         if (!validPassword) {
-            return next(ApiError.badRequest('Wrong password'))
+            return next(ApiError.badRequest('Incorrect password'))
         }
         const jwt = generateJwt(user.id, user.email, user.role)
         return res.json({jwt})
     }
-    async check(req, res, next) {
+    async check(req, res) {
         const jwt = generateJwt(req.user.id, req.user.email, req.user.role)
-        return res.json(jwt)
+        return res.json({jwt})
     }
 }
 

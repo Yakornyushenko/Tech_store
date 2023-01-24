@@ -14,7 +14,7 @@ export const NavBar = observer(() => {
     return (
         <Navbar className='justify-content-between' bg='dark' variant='dark'>
             <Container>
-                {location.pathname !== LOGIN_ROUTE && location.pathname !== REGISTRATION_ROUTE ?
+                {location.pathname !== LOGIN_ROUTE && location.pathname !== REGISTRATION_ROUTE && location.pathname !== ADMIN_ROUTE ?
                     <button
                     className="btn"
                     onClick={() => device.setActiveMenu(!device.activeMenu)}
