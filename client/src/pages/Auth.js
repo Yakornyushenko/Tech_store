@@ -80,7 +80,6 @@ const Auth = observer(() => {
                                             <label className="form-label">Repeat your
                                                 password</label>
                                         </div>
-                                        {isRegistration ?
                                             <div className="form-check d-flex justify-content-center mb-3">
                                                 <input
                                                     checked={user.terms}
@@ -94,8 +93,6 @@ const Auth = observer(() => {
                                                     </Link>
                                                 </label>
                                             </div>
-                                            : null}
-
 
                                         <div className="d-flex justify-content-center">
                                             <button
