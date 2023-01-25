@@ -11,6 +11,12 @@ export const NavBar = observer(() => {
     const history = useHistory()
     const {user, device} = useContext(Context)
     const location = useLocation()
+
+    const logOut = () => {
+        user.setUser({})
+        user.setIsAuth(false)
+    }
+
     return (
         <Navbar className='justify-content-between' bg='dark' variant='dark'>
             <Container>
@@ -36,7 +42,7 @@ export const NavBar = observer(() => {
                     </Nav>
                     :
                     <Nav>
-                        <Button variant={'outline-light'} onClick={() => user.setIsAuth(true)}>log out</Button>
+                        <Button variant={'outline-light'} onClick={() => logOut()}>log out</Button>
                     </Nav>
                 }
             </Container>

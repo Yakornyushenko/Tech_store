@@ -1,4 +1,4 @@
-import React, {useContext, useMemo, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../index";
 
@@ -6,9 +6,7 @@ const DeviceModal = () => {
     const {device} = useContext(Context);
     const [open, setOpen] = useState(false);
     const [info, setInfo] = useState([]);
-    useMemo(() => {
-        console.log('info', info)
-    },[info])
+
     const addProperty = () => {
         setInfo([...info, {title: '', description: '', number: Date.now()}])
     }
