@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import phone from "../styles/images/smartphone.png";
 import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
 import delivery from '../styles/images/delivery.png';
@@ -8,23 +8,23 @@ import returnAndExchange from '../styles/images/returnAndExchange.png';
 import unselectedStar from '../styles/images/unselected_star.png';
 import deviceDesc from '../styles/images/device_desc.png';
 import SideNav from "../components/SideNav";
+import {useParams} from "react-router-dom";
+import {fetchOneDevices} from "../http/deviceCreate";
 
-const DevicePage = () => {
-    const device = {id: 1, name: 'Bosh super star', price: '25000', rating: 4, img: phone}
-    const description = [
-        {id: 1, title: 'random access memory', desc: '10 gb'},
-        {id: 2, title: 'camera', desc: '42 mpx'},
-        {id: 3, title: 'processor', desc: 'Intel Xeon-Platinum 8256'},
-        {id: 4, title: 'number of cores', desc: '3'},
-        {id: 5, title: 'battery', desc: '4500'}
-    ]
+const Device = () => {
+    const [device, setDevice] = useState({info: []})
+    const {id} = useParams()
+    useEffect(() => {
+        fetchOneDevices(id).then(res => setDevice(res))
+    }, [])
+
     return (
         <Container className='mt-3'>
             <SideNav/>
             <Row>
                 <Col md={4}>
                     <h2 className='p-3'>{device.name}</h2>
-                    <Image alt='device image' width={300} height={300} src={device.img}/>
+                    <Image alt='device image' width={300} height={300} src={process.env.REACT_APP_BASE_URL + device.img}/>
                 </Col>
                 <Col md={5}>
                     <div className='d-flex justify-content-between'>
@@ -35,7 +35,7 @@ const DevicePage = () => {
                         <p className='fs-3'>Price: {device.price} $</p>
                     </div>
                     <div>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias corporis cumque dolore doloribus eum nam ratione veniam veritatis. Ab adipisci, alias asperiores deleniti doloribus, eaque ex fugit modi omnis perspiciatis quis veniam voluptatem. Beatae cum dolores expedita incidunt modi odio quasi quidem vitae voluptatibus voluptatum? Ab aliquid autem consequatur, cupiditate ducimus expedita harum illo illum ipsam itaque neque obcaecati odio officia quaerat quam qui quo recusandae sapiente sequi tempore tenetur, ullam veniam, voluptas? Atque, delectus dolore eos nesciunt numquam rem velit voluptatem? Aperiam architecto assumenda dignissimos ducimus eaque earum eligendi id mollitia nesciunt omnis quo, repudiandae similique sint vel voluptatem.
+                        {device.info}
                     </div>
                     <Button style={{maxWidth: 200, marginTop: 20, fontSize:18}} variant={"outline-primary"}>Add to Shopping Cart</Button>
                 </Col>
@@ -102,7 +102,7 @@ const DevicePage = () => {
                     Device description
                     <Image className='m-2' alt='device description' height={28} width={28} src={deviceDesc}/>
                 </p>
-                {description.map((info, index) =>
+                {device.info.map((info, index) =>
                     <Row
                         key={info.id}
                         style={{
@@ -119,4 +119,4 @@ const DevicePage = () => {
     );
 };
 
-export default DevicePage;
+export default Device;

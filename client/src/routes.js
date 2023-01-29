@@ -11,7 +11,7 @@ import {
 import Basket from "./pages/Basket";
 import Shop from "./pages/Shop";
 import Auth from "./pages/Auth";
-import DevicePage from "./pages/DevicePage";
+import Device from "./pages/Device";
 import Terms from "./pages/Terms";
 
 export const authRoutes = [
@@ -40,7 +40,7 @@ export const publicRoutes = [
     },
     {
         path: DEVICE_ROUTE + '/:id',
-        component: DevicePage
+        component: Device
     },
     {
         path: REGISTRATION_ROUTE,
