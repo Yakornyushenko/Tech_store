@@ -1,7 +1,7 @@
 const ApiError = require("../error/apiError");
 const bcrypt = require('bcrypt')
 const jwtToken = require('jsonwebtoken')
-const {User, Basket} = require('../models/models')
+const {User} = require('../models/models')
 
 const generateJwt = (id, email, role) => {
     return jwtToken.sign(
@@ -24,8 +24,8 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5)
         const user = await User.create({email, role, password: hashPassword})
         // const basket = await Basket.create({userId: user.id})
-        const jwt = generateJwt(user.id, user.email, user.role )
-        return res.json({jwt})
+        const token = generateJwt(user.id, user.email, user.role )
+        return res.json({token})
     }
     async login(req, res, next) {
         const {email, password} = req.body
@@ -37,12 +37,12 @@ class UserController {
         if (!validPassword) {
             return next(ApiError.badRequest('Incorrect password'))
         }
-        const jwt = generateJwt(user.id, user.email, user.role)
-        return res.json({jwt})
+        const token = generateJwt(user.id, user.email, user.role)
+        return res.json({token})
     }
-    async check(req, res) {
-        const jwt = generateJwt(req.user.id, req.user.email, req.user.role)
-        return res.json({jwt})
+    async check(req, res, ) {
+        const token = generateJwt(req.user.id, req.user.email, req.user.role)
+        return res.json({token})
     }
 }
 
