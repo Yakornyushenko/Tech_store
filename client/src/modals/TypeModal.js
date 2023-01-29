@@ -1,14 +1,23 @@
-import React, {useState, useContext} from 'react';
-import {Button, Dropdown, Form, Modal} from "react-bootstrap";
-import {Context} from "../index";
+import React, {useState, useContext, useEffect} from 'react';
+import {Button, Form, Modal} from "react-bootstrap";
+import {createType} from "../http/deviceCreate";
 
 const TypeModal = () => {
+    const [inputValue, setInputValue] = useState('')
     const [open, setOpen] = useState(false)
-    const {device} = useContext(Context)
+
+    const addType = () => {
+        createType({type: inputValue}).then(data => {
+                setInputValue('')
+                setOpen(!open)
+            }
+        )
+    }
+
     return (
         <div>
             <Button className="btn btn-primary"
-                    style={{width:120, height:60}}
+                    style={{width: 120, height: 60}}
                     onClick={() => setOpen(!open)}>
                 Add type
             </Button>
@@ -23,33 +32,22 @@ const TypeModal = () => {
                             </Button>
                         </div>
                         <Form className="modal-body">
-                                <Dropdown className='mt-2 mb-2'>
-                                    <Dropdown.Toggle>Choose type</Dropdown.Toggle>
-                                    <Dropdown.Menu>
-                                        {device.types.map(type =>
-                                            <Dropdown.Item key={type.id}>
-                                                {type.name}
-                                            </Dropdown.Item>
-                                        )}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-
-                            <Dropdown className='mt-2 mb-2'>
-                                <Dropdown.Toggle>Choose brand</Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {device.brands.map(brands =>
-                                        <Dropdown.Item key={brands.id}>
-                                            {brands.name}
-                                        </Dropdown.Item>
-                                    )}
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <Form.Control
+                                placeholder='Enter type'
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                            />
                         </Form>
                         <div className="modal-footer" style={{border: "none"}}>
                             <Button onClick={() => setOpen(!open)} className="btn btn-secondary">
                                 Close
                             </Button>
-                            <Button className="btn btn-primary">Save</Button>
+                            <Button
+                                onClick={() => addType()}
+                                className="btn btn-primary"
+                            >
+                                Save
+                            </Button>
                         </div>
                     </div>
                 </div>
