@@ -5,7 +5,7 @@ import DeviceList from "../components/DeviceList";
 import SideNav from "../components/SideNav";
 import {observer} from "mobx-react-lite";
 import {Context} from "../index";
-import {fetchBrands, fetchDevices, fetchTypes} from "../http/deviceCreate";
+import {fetchBrands, fetchDevices, fetchTypes} from "../http/deviceApi";
 
 const Shop = observer(() => {
     const {device} = useContext(Context)
