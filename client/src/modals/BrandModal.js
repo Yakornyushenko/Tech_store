@@ -1,21 +1,14 @@
-import React, {useState} from 'react';
-import {Button, Form, Modal} from "react-bootstrap";
-import {createBrand} from "../http/deviceApi";
+import React, {useContext, useState} from 'react';
+import {Button, Dropdown, Form, Modal} from "react-bootstrap";
+import {Context} from "../index";
 
 const BrandModal = () => {
     const [open, setOpen] = useState(false)
-    const [inputValue, setInputValue] = useState('')
-    const addBrand = () => {
-        createBrand({name: inputValue}).then(() => {
-                setInputValue('')
-                setOpen(!open)
-            }
-        )
-    }
+    const {device} = useContext(Context)
     return (
         <div>
             <Button className="btn btn-primary"
-                    style={{width: 120, height: 60}}
+                    style={{width:120, height:60}}
                     onClick={() => setOpen(!open)}>
                 Add brand
             </Button>
@@ -29,21 +22,26 @@ const BrandModal = () => {
                                 <span>&times;</span>
                             </Button>
                         </div>
-                        <Form className="modal-body">
-                            <Form.Control
-                                placeholder='enter brand'
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}/>
-                        </Form>
+                            <Form>
+                                <div className="modal-body">
+                                    <Dropdown className='mt-2 mb-2'>
+                                        <Dropdown.Toggle>Choose type</Dropdown.Toggle>
+                                        <Dropdown.Menu>
+                                            {device.types.map(type =>
+                                                <Dropdown.Item key={type.id}>
+                                                    {type.name}
+                                                </Dropdown.Item>
+                                            )}
+                                        </Dropdown.Menu>
+                                    </Dropdown>
+
+                                </div>
+                            </Form>
                         <div className="modal-footer" style={{border: "none"}}>
                             <Button onClick={() => setOpen(!open)} className="btn btn-secondary">
                                 Close
                             </Button>
-                            <Button className="btn btn-primary"
-                                    onClick={addBrand}
-                            >
-                                Save
-                            </Button>
+                            <Button className="btn btn-primary">Save</Button>
                         </div>
                     </div>
                 </div>

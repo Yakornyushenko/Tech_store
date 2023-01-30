@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
-import {createType} from "../http/deviceApi";
+import {createType} from "../http/deviceCreate";
 
 const TypeModal = () => {
     const [inputValue, setInputValue] = useState('')
     const [open, setOpen] = useState(false)
 
     const addType = () => {
-        createType({name: inputValue}).then(() => {
+        createType({type: inputValue}).then(data => {
                 setInputValue('')
                 setOpen(!open)
             }
@@ -35,7 +35,7 @@ const TypeModal = () => {
                             <Form.Control
                                 placeholder='Enter type'
                                 value={inputValue}
-                                onChange={e => setInputValue(e.target.value)}
+                                onChange={(e) => setInputValue(e.target.value)}
                             />
                         </Form>
                         <div className="modal-footer" style={{border: "none"}}>

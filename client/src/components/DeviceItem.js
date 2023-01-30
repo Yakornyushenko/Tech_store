@@ -17,7 +17,7 @@ const DeviceItem = ({device}) => {
                 <Image alt='phone image' style={{cursor: "pointer"}} width={150} height={150}
                        src={process.env.REACT_APP_BASE_URL + device.img}/>
                 <div className='text-black-70 d-flex justify-content-between align-items-center mt-2'>
-                    <div>Device rating</div>
+                    <div>Samsung</div>
                     <div style={{cursor: "pointer"}} className='d-flex'>
                         <div style={{color: "gold"}} className='me-2'>{device.rating}</div>
                         <Image alt='rate' width={24} height={24} src={unselectedStar}/>
