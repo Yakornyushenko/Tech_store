@@ -24,7 +24,7 @@ const DeviceItem = ({device}) => {
                     </div>
                 </div>
                 <Link to={DEVICE_ROUTE + '/' + device.id}
-                      className='linkSecondary text-decoration-none'>{device.name}</Link>
+                      className='linkSecondary text-decoration-none'>Device name: {device.name}</Link>
             </Card>
         </Col>
     );
