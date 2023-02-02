@@ -33,3 +33,23 @@ export const fetchOneDevices = async (id) => {
     const {data} = await host.get(`api/device/${id}`)
     return data
 }
+
+export const addToBasket = async (deviceId) => {
+    const {data} = await authHost.post('api/basket', deviceId)
+    return data
+}
+
+export const getBasket = async () => {
+    const {data} = await authHost.get('api/basket')
+    return data
+}
+
+export const removeFromBasket = async (deviceId) => {
+    const {data} = await authHost.delete('api/basket', deviceId)
+    return data
+}
+
+export const clearBasket = async () => {
+    const {data} = await authHost.delete('api/basket')
+    return data
+}

@@ -13,14 +13,13 @@ const App = observer(() => {
     const [loadingPage, setLoadingPage] = useState(true)
     useEffect(() => {
         setTimeout(() => {
+
             check().then(res => {
                 user.setUser(res)
                 user.setIsAuth(true)
             }).finally(() => setLoadingPage(false))
-            console.log('user', user)
         }, 1000)
     }, [])
-
     if (loadingPage) {
         return <Loader/>
     }

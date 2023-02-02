@@ -5,6 +5,7 @@ export default class DeviceStore {
         this._types = [];
         this._brands = [];
         this._devices = [];
+        this._basket = [];
         this._activeMenu = true;
         this._selectedType = {};
         this._selectedBrand = {};
@@ -44,6 +45,9 @@ export default class DeviceStore {
     setDevices(devices) {
         this._devices = devices
     }
+    setBasket(basket) {
+        this._basket = basket
+    }
 
     get activeMenu() {
         return this._activeMenu
@@ -65,6 +69,9 @@ export default class DeviceStore {
     }
     get limit() {
         return this._limit
+    }
+    get basket() {
+        return this._basket
     }
 
     get selectedType() {
