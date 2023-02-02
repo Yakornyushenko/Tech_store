@@ -1,9 +1,12 @@
 import React, {useContext} from 'react';
 import {Context} from "../index";
 import {observer} from "mobx-react-lite";
-import {Card, Form} from "react-bootstrap";
+import {Button, Card, Form} from "react-bootstrap";
+import {BASKET_ROUTE} from "../utils/consts";
+import {useHistory} from "react-router-dom";
 
 const BrandBar = observer(() => {
+    const history = useHistory()
     const {device} = useContext(Context)
     return (
         <Form className='d-flex justify-content-center mb-4'>
@@ -18,6 +21,13 @@ const BrandBar = observer(() => {
                     {brand.name}
                 </Card>
             )}
+            <Button
+                style={{width: 140, margin: 10, fontSize: 18}}
+                variant={"outline-primary"}
+                onClick={() => history.push(BASKET_ROUTE)}
+            >
+                Shopping Cart
+            </Button>
         </Form>
     );
 });
